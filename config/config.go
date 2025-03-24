@@ -13,6 +13,7 @@ type Config struct {
 
 type ServConfig struct {
 	Port string
+	DNS  string
 }
 
 func LoadConfig() *Config {
