@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"robotlesson/config"
+)
 
 func main() {
-	fmt.Println("Hello world")
+	config := config.LoadConfig()
+	fmt.Printf("HELLO WORLD \nPort = %s", config.Serv.Port)
 }
