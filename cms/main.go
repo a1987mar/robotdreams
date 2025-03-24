@@ -1,9 +1,9 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 	"robotlesson/config"
+	"robotlesson/pkg"
 )
 
 func main() {
@@ -17,6 +17,6 @@ func main() {
 
 func Login() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		json.NewEncoder(w).Encode("Hello world")
+		pkg.JsonResponse(w, "HelloWorld", http.StatusOK)
 	}
 }
