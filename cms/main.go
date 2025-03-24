@@ -8,5 +8,4 @@ import (
 func main() {
 	config := config.LoadConfig()
 	fmt.Printf("HELLO WORLD \nPort = %s", config.Serv.Port)
-	fmt.Println("fmt")
 }
