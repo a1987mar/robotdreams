@@ -1,11 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"net/http"
 	"robotlesson/config"
 )
 
 func main() {
 	config := config.LoadConfig()
-	fmt.Printf("HELLO WORLD \nPort = %s", config.Serv.Port)
+
+	server := http.Server{
+		Addr: config.Serv.Port,
+	}
+	server.ListenAndServe()
+
 }
