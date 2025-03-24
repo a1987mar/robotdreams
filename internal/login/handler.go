@@ -5,3 +5,11 @@ type Login struct {
 	Passwors string `json:"password"`
 	Name     string `json:"name"`
 }
+
+func NewLogin(email, password, name string) *Login {
+	return &Login{
+		Email:    email,
+		Passwors: password,
+		Name:     name,
+	}
+}
