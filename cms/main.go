@@ -1,32 +1,26 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"robotlesson/config"
 	"robotlesson/internal/login"
-	pkg "robotlesson/pkg/respos"
 )
 
 func main() {
 	config := config.LoadConfig()
-
-	http.HandleFunc("GET /login", Log())
-
+	router := http.NewServeMux()
+	login.NewLoginHandler(router)
 	fmt.Println("Start server")
 	server := http.Server{
-		Addr: config.Serv.Port,
+		Addr:    config.Serv.Port,
+		Handler: router,
 	}
-	server.ListenAndServe()
-
-}
-
-func Log() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		var log login.Login
-		json.NewDecoder(r.Body).Decode(&log)
-		pkg.JsonResponse(w, log, 201)
+	err := server.ListenAndServe()
+	if err != nil {
+		fmt.Println("STOP SERVER", err)
+		os.Exit(2)
 	}
-
+	os.Exit(2)
 }
