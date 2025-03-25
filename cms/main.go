@@ -11,26 +11,22 @@ import (
 
 func main() {
 	config := config.LoadConfig()
-	http.Handle("GET /login", Login())
+
+	http.HandleFunc("GET /login", Log())
 
 	fmt.Println("Start server")
 	server := http.Server{
 		Addr: config.Serv.Port,
 	}
-	err := server.ListenAndServe()
-	if err != nil {
-		fmt.Println("Stop server")
-	}
+	server.ListenAndServe()
+
 }
 
-func Login() http.HandlerFunc {
+func Log() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var log login.Login
-		body := json.NewDecoder(r.Body).Decode(&log)
-		if body != nil {
-			http.Error(w, "bad reqyest", http.StatusBadRequest)
-		}
-		pkg.JsonResponse(w, body, http.StatusOK)
+		json.NewDecoder(r.Body).Decode(&log)
+		pkg.JsonResponse(w, log, 201)
 	}
 
 }
