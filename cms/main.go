@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 	"robotlesson/config"
-	"robotlesson/internal/login"
+	"robotlesson/idternal/login"
 )
 
 func main() {
